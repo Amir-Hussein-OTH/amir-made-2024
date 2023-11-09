@@ -1,3 +1,19 @@
-.DS_Store
-/data/*
-!/data/.gitkeep
+# Ignore local virtualenvs
+lib/
+bin/
+include/
+.Python/
+
+build/
+dist/
+
+issue/
+env/
+.env/
+.venv/
+/pythonenv*/
+
+.project
+.settings
+.vscode
+_pycache_/

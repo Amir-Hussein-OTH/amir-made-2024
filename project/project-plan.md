@@ -50,7 +50,6 @@ This dataset contains daily bicycle ridership data for Munich in 2023, including
 
 ## Work Packages
 
-1. Developing an automated data pipeline [#1] [i1]
-2. Write data engineering script for pulling data [#2] [i2]
+1. Write data engineering script for pulling data [#3] [i3]
 
-[i1]: https://github.com/jvalue/made-template/issues/1
+[i3]:https://github.com/Amir-Hussein-OTH/amir-made-2024/issues/3

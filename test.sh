@@ -13,5 +13,5 @@ echo "Executing the data pipeline..."
 python data/pipeline_script.py
 echo "Data pipeline execution completed."
 
-# Provide a friendly farewell message
+# Provide a friendly
 echo "Pipeline script execution finished."

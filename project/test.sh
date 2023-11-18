@@ -9,10 +9,4 @@ echo "Installing project dependencies..."
 pip install -r requirements.txt
 echo "Dependencies installed successfully."
 
-# Execute the pipeline
-echo "Executing the data pipeline..."
-python data/pipeline_script.py
-echo "Data pipeline execution completed."
 
-# Provide a friendly
-echo "Pipeline script execution finished."

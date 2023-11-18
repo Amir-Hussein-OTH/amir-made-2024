@@ -9,5 +9,6 @@ df = pd.read_csv(data_url, sep=";")
 # Create the SQLAlchemy engine
 engine = create_engine("sqlite:///airports.sqlite")
 
+
 # Write the DataFrame to the SQLite database
 df.to_sql("airports", engine, if_exists="replace", index=False)

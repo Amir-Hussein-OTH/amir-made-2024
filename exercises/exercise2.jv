@@ -1,0 +1,48 @@
+// Define a constant for the columns
+constant ColumnsDefinition = [
+    "EVA_NR" oftype integer,
+    "DS100" oftype text,
+    "IFOPT" oftype IFOPT,
+    "NAME" oftype text,
+    "Verkehr" oftype VerkehrType,
+    "Laenge" oftype Coordinate,
+    "Breite" oftype Coordinate,
+    "Betreiber_Name" oftype text,
+    "Betreiber_Nr" oftype integer
+];
+
+// Pipeline definition for processing train stops data
+pipeline TrainstopsPipeline {
+    TrainstopsExtractor
+        -> TrainstopsTextFileInterpreter
+        -> TrainstopsCsvInterpreter
+        -> TrainstopsTableInterpreter
+        -> TrainstopsSQLiteLoader;
+
+    // HTTP extractor block to get the dataset from a specific URL
+    block TrainstopsExtractor oftype HttpExtractor {
+        url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
+    }
+
+    // Placeholder block for text file interpretation
+    block TrainstopsTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+    // CSV interpreter block with a specific delimiter
+    block TrainstopsCsvInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    // Table interpreter block using the constant for columns definition
+    block TrainstopsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: ColumnsDefinition;
+    }
+
+    // SQLite loader block to store the processed data in a SQLite database
+    block TrainstopsSQLiteLoader oftype SQLiteLoader {
+        table: "trainstops";
+        file: "trainstops.sqlite";
+    }
+}

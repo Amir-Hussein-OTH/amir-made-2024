@@ -27,3 +27,5 @@ for col in keep_cols[3:]:
 # Create the SQLAlchemy engine
 engine = create_engine("sqlite:///cars.sqlite")
 
+# Write the DataFrame to the SQLite database
+df.to_sql("cars", engine, if_exists="replace", index=False)

@@ -6,29 +6,29 @@ on:
       - main
 
 jobs:
-  pipeline-feedback:
+  exercise-feedback:
     runs-on: ubuntu-latest
+    # Checkout repository
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           path: main
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-
-      # Install Python and dependencies
-      - name: Set up Python and Install Dependencies
+      # Install python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
-      - run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
-      # Run exercise feedback
-      - name: Pipeline feedback
+      # Install dependencies
+      - name: Install dependencies
         run: |
-          ./project/test.sh
+          python -m pip install --upgrade pip
+          pip install -r ./main/requirements.txt
+
+      # Run test script
+      - name: Test the project
+        run: |
+          ./main/test.sh
+

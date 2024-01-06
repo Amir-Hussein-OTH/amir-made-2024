@@ -33,16 +33,16 @@ Project Steps:
 ## Datasources
 
 ### Datasource1: Fahrrad-Dauerzählstellen München
-* Metadata URL: https://www.govdata.de/web/guest/suchen/-/details/daten-der-raddauerzahlstellen-munchen-2023
-* Data URL:https://opendata.muenchen.de/dataset/022a11ff-4dcb-4f03-b7dd-a6c94a094587/resource/86962013-4854-4deb-aaf9-36e3770cde24/download/rad_2012_15min_06_06_23_r.csv
+* Metadata URL: [Link](https://www.govdata.de/web/guest/suchen/-/details/daten-der-raddauerzahlstellen-munchen-2023)
+* Data URL: [Link](https://opendata.muenchen.de/dataset/022a11ff-4dcb-4f03-b7dd-a6c94a094587/resource/86962013-4854-4deb-aaf9-36e3770cde24/download/rad_2012_15min_06_06_23_r.csv)
 * Data Type: CSV
 
 *Description*:
 This dataset contains daily bicycle ridership data for Munich in 2023, including the number of daily bicycle trips and weather information (temperature, precipitation). It plays a crucial role in understanding the impact of weather on bicycle ridership.
 
 ### Datasource2: Meteostat Munich Weather Data
-* Metadata URL:https://meteostat.net/de/place/de/munich?s=10865&t=2023-10-14/2023-10-21
-* Data URL:https://meteostat.net/de/place/de/munich?s=10865&t=2023-10-14/2023-10-21
+* Metadata URL:[Link](https://meteostat.net/de/place/de/munich?s=10865&t=2023-10-14/2023-10-21)
+* Data URL:[Link](https://meteostat.net/de/place/de/munich?s=10865&t=2023-10-14/2023-10-21)
 * Data Type: CSV
 
 *Description*:
@@ -51,7 +51,7 @@ This dataset contains daily bicycle ridership data for Munich in 2023, including
 ## Work Packages
 
 1. Write data engineering script for pulling data [#3] [i3]
-2. Create automated aata pipeline execution for the project [#4] [i4]
+2. Create automated data pipeline execution for the project [#4] [i4]
 
 [i3]:https://github.com/Amir-Hussein-OTH/amir-made-2024/issues/3
 [i4]:https://github.com/Amir-Hussein-OTH/amir-made-2024/issues/4

@@ -44,7 +44,8 @@ typing_extensions==4.5.0
 tzdata==2023.3
 tzlocal==5.0.1
 wcwidth==0.2.6
-plotly==5.3.1
 matplotlib==3.4.3
 seaborn==0.11.2
+plotly==5.2.2
+kaleido==0.2.1
 

@@ -22,6 +22,13 @@ def load_dataset1():
                   'kommentar']
     df['datum'] = pd.to_datetime(df['datum']).dt.normalize()
     df = df.groupby('datum', as_index=False).sum(numeric_only=True)
+
+    # Rename columns for Dataset 1
+    df.rename(columns={'datum': 'Date',
+                       'richtung_1': 'Total bikers',
+                       'richtung_2': 'Bikers inward',
+                       'gesamt': 'Bikers outward'}, inplace=True)
+
     return df
 
 
@@ -31,6 +38,19 @@ def load_dataset2():
     df = pd.DataFrame(data)
     # Data Transformation for Dataset 2
     df.columns = ['temp', 'dwpt', 'rhum', 'prcp', 'snow', 'wdir', 'wspd', 'wpgt', 'pres', 'tsun']
+
+    # Rename columns for Dataset 2
+    df.rename(columns={'temp': 'Average temperature',
+                       'dwpt': 'Min temperature',
+                       'rhum': 'Max temperature',
+                       'prcp': 'Total rainfall',
+                       'snow': 'Snow-level',
+                       'wdir': 'Wind-direction',
+                       'wspd': 'Wind-speed',
+                       'wpgt': 'Lace boe',
+                       'pres': 'Air pressure',
+                       'tsun': 'Duration of sunshine'}, inplace=True)
+
     return df
 
 

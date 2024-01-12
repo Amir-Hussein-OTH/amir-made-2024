@@ -1,0 +1,135 @@
+constraint DeviceIDRange oftype RangeConstraint {
+    lowerBound: 1;
+}
+
+
+valuetype Monat oftype decimal {
+    constraints: [
+            MonatRange,
+    ];
+}
+
+
+constraint MonatRange oftype RangeConstraint {
+    lowerBound: 1;
+    upperBound: 12;
+}
+
+
+valuetype Temperature oftype decimal {
+    constraints: [
+            TemperatureRange,
+    ];
+}
+
+
+constraint TemperatureRange oftype RangeConstraint {
+    lowerBound: -50;
+    upperBound: 50;
+}
+
+
+valuetype DeviceStatus oftype text {
+    constraints: [
+            DeviceStatusAllowList,
+    ];
+}
+
+
+
+pipeline DataPipeline {
+
+    DataExtractor
+        -> ZipArchiveInterpreter
+        -> DataFilePicker
+        -> DataTextFileInterpreter 
+        -> DataCSVInterpreter
+        -> TemperatureHeaderWriter
+        -> BatteryTemperatureHeaderWriter
+        -> DataTableInterpreter
+        -> TemperatureTransfomer
+        -> BatteryTemperatureTransfomer
+        -> DataLoader;
+
+
+
+	block DataExtractor oftype HttpExtractor {
+		url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+	}
+
+
+	block ZipArchiveInterpreter oftype ArchiveInterpreter {
+		archiveType: "zip";
+	}
+
+    // the file picker that locates the desired file "data.csv" in the zip archive
+    block DataFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+
+    block DataTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+
+    block DataCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+
+    block TemperatureHeaderWriter oftype CellWriter {
+        at: cell E1;
+        write: ["Temperatur"];
+       
+    }
+
+
+    block BatteryTemperatureHeaderWriter oftype CellWriter {
+        at: cell M1;
+        write: ["Batterietemperatur"];
+       
+    }
+
+
+    block DataTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Geraet" oftype DeviceID,
+            "Hersteller" oftype text,
+            "Model" oftype text,
+            "Monat" oftype Monat,
+            "Temperatur" oftype Temperature,
+            "Batterietemperatur" oftype Temperature,	
+            "Geraet aktiv" oftype DeviceStatus,
+        ];      
+    }
+
+
+    block TemperatureTransfomer oftype TableTransformer {
+        inputColumn: 'Temperatur';
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+
+    block BatteryTemperatureTransfomer oftype TableTransformer {
+        inputColumn: 'Batterietemperatur';
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+
+    transform CelsiusToFahrenheit {
+        from tempCelsius oftype decimal;
+        to tempFahrenheit oftype decimal;
+
+        tempFahrenheit: (tempCelsius *9/5) +32;
+    }
+
+
+    block DataLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+}
